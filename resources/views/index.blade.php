@@ -11,7 +11,7 @@
 <body style="background:#e2e8f0">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="border-top: 5px solid #4e89ae; background: #43658b">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> SMK INDONESIA</a>
+            <a class="navbar-brand" href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> PeTIK</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria- label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

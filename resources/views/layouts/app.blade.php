@@ -44,10 +44,7 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ route('logout') }}" style="cursor:
-pointer" onclick="event.preventDefault();
-document.getElementById('lo
-gout-form').submit();" class="dropdown-item has-icon text-danger">
+                            <a href="{{ route('logout') }}" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                             <form id="logout-form" action="{{ route('logout')
@@ -61,7 +58,7 @@ gout-form').submit();" class="dropdown-item has-icon text-danger">
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="/">PeTIK</a>
+                        <a href="/">Pesantren TIK</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="/">PeTIK</a>
