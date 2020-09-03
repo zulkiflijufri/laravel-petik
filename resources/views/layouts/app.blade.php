@@ -116,11 +116,11 @@ link" href="#"><i class="fas fa-book-open"></i>
                             @endif
                             <ul class="dropdown-menu">
                                 @can('roles.index')
-                                <li class="{{ setActive('admin/role') }}"><a class="nav-link" href="#">i class="fas fa-unlock"></i>Roles</a>
+                                <li class="{{ setActive('admin/role') }}"><a class="nav-link" href="#"><i class="fas fa-unlock"></i>Roles</a>
                                 </li>
                                 @endcan
                                 @can('permissions.index')
-                                <li class="{{ setActive('admin/permission') }}"> <a class="nav-link" href="#"><i class="fas fa-key"></i>
+                                <li class="{{ setActive('admin/permission') }}"> <a class="nav-link" href="{{ route('admin.permission.index') }}"><i class="fas fa-key"></i>
                                         Permissions</a>
                                 </li>
                                 @endcan

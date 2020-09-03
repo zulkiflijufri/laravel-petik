@@ -18,5 +18,8 @@ Route::group(['prefix' => 'admin'], function () {
         
         //dahsboard
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard.index');
+    
+        //permission
+        Route::resource('/permission', 'Admin\PermissionController', ['except' => ['show', 'create', 'edit', 'update', 'delete'], 'as' => 'admin']);
     });
 });
