@@ -15,11 +15,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'auth'], function () {
-        
-        //dahsboard
+
+        // dahsboard
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard.index');
-    
-        //permission
+
+        // permission
         Route::resource('/permission', 'Admin\PermissionController', ['except' => ['show', 'create', 'edit', 'update', 'delete'], 'as' => 'admin']);
+
+        // role
+        Route::resource('/role', 'Admin\RoleController', ['except' => ['show'], 'as' => 'admin']);
     });
 });

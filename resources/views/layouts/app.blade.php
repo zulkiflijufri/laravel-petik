@@ -39,8 +39,9 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
                     </ul>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-<img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -116,7 +117,7 @@ link" href="#"><i class="fas fa-book-open"></i>
                             @endif
                             <ul class="dropdown-menu">
                                 @can('roles.index')
-                                <li class="{{ setActive('admin/role') }}"><a class="nav-link" href="#"><i class="fas fa-unlock"></i>Roles</a>
+                                <li class="{{ setActive('admin/role') }}"><a class="nav-link" href="{{route('admin.role.index')}}"><i class="fas fa-unlock"></i>Roles</a>
                                 </li>
                                 @endcan
                                 @can('permissions.index')
@@ -170,28 +171,28 @@ link" href="#"><i class="fas fa-book-open"></i>
         });
 
         //flash message
-        @if(session()-> has('success'))
+        @if(session()->has('success'))
         swal({
-            type: "success",
-            icon: "success",
-            title: "BERHASIL!",
-            text: "{{ session('success') }}",
-            timer: 1500,
-            showConfirmButton: false,
-            showCancelButton: false,
-            buttons: false
+            type: "success"
+            , icon: "success"
+            , title: "BERHASIL!"
+            , text: "{{ session('success') }}"
+            , timer: 1500
+            , showConfirmButton: false
+            , showCancelButton: false
+            , buttons: false
         });
-        @elseif(session()-> has('error'))
+        @elseif(session()->has('error'))
         swal({
-            type: "error",
-            icon: "error",
-            title: "GAGAL!,"
-            text: "{{ session('error') }}",
-            timer: 1500,
-            showConfirmButton: false,
-            showCancelButton: false,
-            buttons: false,
-        });
+            type: "error"
+            , icon: "error"
+            , title: "GAGAL!,"
+            text: "{{ session('error') }}"
+            , timer: 1500
+            , showConfirmButton: false
+            , showCancelButton: false
+            , buttons: false
+        , });
         @endif
 
     </script>
