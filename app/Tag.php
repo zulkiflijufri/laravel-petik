@@ -9,7 +9,7 @@ class Tag extends Model
     // assigment all field
     protected $guarded = [];
 
-    public function posts() 
+    public function posts()
     {
         return $this->belongsToMany(Post::class);
     }
