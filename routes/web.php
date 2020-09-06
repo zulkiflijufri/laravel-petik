@@ -24,5 +24,8 @@ Route::group(['prefix' => 'admin'], function () {
 
         // role
         Route::resource('/role', 'Admin\RoleController', ['except' => ['show'], 'as' => 'admin']);
+
+        // user
+        Route::resource('/user', 'Admin\UserController', ['except' => ['show'], 'as' => 'admin']);
     });
 });

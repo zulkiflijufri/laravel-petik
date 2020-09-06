@@ -46,7 +46,7 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RoleRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(RoleRequest $request)
@@ -91,7 +91,7 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RoleUpdateRequest  $request
      * @param  int  $role
      * @return \Illuminate\Http\Response
      */
