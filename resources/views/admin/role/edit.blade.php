@@ -16,7 +16,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label>NAMA ROLE</label>
-                            <input type="text" name="name" value="{{ old('name',$role->name) }}" placeholder="Masukkan Nama Role" class="form-control @error('title') is-invalid @enderror">
+                            <input type="text" name="name" value="{{ old('name',$role->name) }}" placeholder="Masukkan Nama Role" class="form-control @error('title') is-invalid @enderror" autocomplete="off">
                             @error('name')
                             <div class="invalid-feedback" style="display: block">
                                 {{ $message }}
@@ -27,12 +27,17 @@
                             <label class="font-weight-bold">PERMISSIONS</label>
                             @foreach ($permissions as $permission)
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="check-{{ $permission->id }}" @if($role->permissions->contains($permission)) checked @endif>
+                                <input class="form-check-input" type="checkbox" name="permissions[]" @if(is_array(old('permissions')) && in_array($permission->name, old('permissions'))) checked @endif value="{{ $permission->name }}" id="check-{{ $permission->id }}" @if($role->permissions->contains($permission)) checked @endif>
                                 <label class="form-check-label" for="check-{{$permission->id }}">
                                     {{ $permission->name }}
                                 </label>
                             </div>
                             @endforeach
+                            @error('permissions')
+                            <div class="invalid-feedback" style="display:block">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <button class="btn btn-primary mr-1 btn-submit" type="submit"><i class="fa fa-paper-plane"></i>
                             UPDATE</button>

@@ -24,15 +24,20 @@
                             @enderror
                         </div>
                         <div class=" form-group">
-                            <label class="font-weight-bold">PERMISSIONS</label>
+                            <label class="font-weight-bold">PERMISSIONS</label><br>
                             @foreach ($permissions as $permission)
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="check-{{ $permission->id }}">
+                                <input class="form-check-input" type="checkbox" name="permissions[]" @if(is_array(old('permissions')) && in_array($permission->name, old('permissions'))) checked @endif value="{{ $permission->name }}" id="check-{{ $permission->id }}">
                                 <label class="form-check-label" for="check-{{$permission->id }}">
                                     {{ $permission->name }}
                                 </label>
                             </div>
                             @endforeach
+                            @error('permissions')
+                            <div class="invalid-feedback" style="display:block">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <button class="btn btn-primary mr-1 btn-submit" type="submit"><i class="fa fa-paper-plane"></i>
                             SIMPAN</button>

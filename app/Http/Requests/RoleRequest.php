@@ -24,14 +24,17 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:roles'
+            'name' => 'required|unique:roles',
+            'permissions' => 'required|array|min:1',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Role harus diisi!'
+            'name.required' => 'Role harus diisi!',
+            'name.unique' => 'Role ini sudah ada!',
+            'permissions.required' => 'Permission harus diisi!'
         ];
     }
 }
