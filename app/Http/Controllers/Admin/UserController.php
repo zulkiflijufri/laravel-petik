@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 
@@ -37,7 +38,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::latest()->get();
-        return view('admin.user.index',compact('roles'));
+        return view('admin.user.create',compact('roles'));
     }
 
     /**
