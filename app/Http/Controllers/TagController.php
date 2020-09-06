@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:tags.index|tags.create|tags.edit|tags.delete']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,12 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::latest()->when(request()->q,
+        function($tags) {
+            $tags = $tags->where('name', 'like', '%'. request()->q . '%');
+        })->paginate(10);
+
+        return view('admin.tag.index', compact('tags'));
     }
 
     /**
@@ -24,7 +35,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tag.create');
     }
 
     /**
@@ -35,7 +46,20 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:tags'
+        ]);
+
+        $tag = Tag::create([
+            'name' => $request->input('name'),
+            'slug' => Str::slug($request->input('name'), '-')
+        ]);
+
+        if($tag){
+            return redirect()->route('admin.tag.index')->with(['success' =>'Data berhasil disimpan!']);
+        } else{
+            return redirect()->route('admin.tag.index')->with(['error' => 'Data gagal disimpan!']);
+        }
     }
 
     /**
@@ -57,7 +81,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('admin.tag.edit', compact('tag'));
     }
 
     /**
@@ -69,7 +93,22 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:tags,name,'.$tag->id
+        ]);
+
+        $tag = Tag::findOrFail($tag->id);
+
+        $tag->update([
+            'name' => $request->input('name'),
+            'slug' => Str::slug($request->input('name'), '-')
+        ]);
+
+        if($tag){
+            return redirect()->route('admin.tag.index')->with(['success' => 'Data berhasil diupdate!']);
+        } else {
+            return redirect()->route('admin.tag.index')->with(['error' => 'Data gagal diupdate!']);
+        }
     }
 
     /**
@@ -80,6 +119,16 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag = Tag::findOrFail($id)->delete();
+
+        if ($tag) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error'
+            ]);
+        }
     }
 }

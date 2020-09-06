@@ -35,7 +35,11 @@
                                 <th scope="col" style="text-align: center;width:6%">NO.</th>
                                 <th scope="col">NAMA USER</th>
                                 <th scope="col">ROLE</th>
+                                @if($user[0] == 'admin')
                                 <th scope="col" style="width: 15%;text-align:center">AKSI</th>
+                                @else
+                                <th></th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>

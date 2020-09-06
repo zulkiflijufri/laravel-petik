@@ -22,12 +22,15 @@ class UserController extends Controller
      */
     public function index()
     {
+        // cek role user login
+        $user = User::find(auth()->user()->id)->getRoleNames();
+
         $users = User::latest()->when(request()->q,
         function($users) {
             $users = $users->where('name', 'like', '%' . request()->q . '%');
         })->paginate(10);
 
-        return view('admin.user.index', compact('users'));
+        return view('admin.user.index', compact('user', 'users'));
     }
 
     /**
