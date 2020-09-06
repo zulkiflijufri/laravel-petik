@@ -69,16 +69,11 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
                         <li class="{{ setActive('admin/dashboard') }}"><a class="nav-link" href="{{ route('admin.dashboard.index') }}"><i class="fas fa-tachometer-alt"></i>
                                 <span>Dashboard</span></a></li>
                         @can('posts.index')
-                        <li class="{{ setActive('admin/post') }}"><a class="nav-
-link" href="#"><i class="fas fa-book-open"></i>
+                        <li class="{{ setActive('admin/post') }}"><a class="nav-link" href="#"><i class="fas fa-book-open"></i>
                                 <span>Berita</span></a></li>
                         @endcan
                         @can('tags.index')
-                        <li class="{{ setActive('admin/tag') }}"><a class="nav-link" href="#"><i class="fas fa-book-open"></i>
-                                <span>Berita</span></a></li>
-                        @endcan
-                        @can('tags.index')
-                        <li class="{{ setActive('admin/tag') }}"><a class="nav-link" href="#"><i class="fas fa-tags"></i>
+                        <li class="{{ setActive('admin/tag') }}"><a class="nav-link" href="{{route('admin.tag.index')}}"><i class="fas fa-tags"></i>
                                 <span>Tags</span></a>
                         </li>
                         @endcan
@@ -126,8 +121,7 @@ link" href="#"><i class="fas fa-book-open"></i>
                                 </li>
                                 @endcan
                                 @can('users.index')
-                                <li class="{{ setActive('admin/user') }}"><a class="nav-link"
-                                href="{{route('admin.user.index')}}"><i class="fas fa-users"></i>Users</a>
+                                <li class="{{ setActive('admin/user') }}"><a class="nav-link" href="{{route('admin.user.index')}}"><i class="fas fa-users"></i>Users</a>
                                 </li>
                                 @endcan
                             </ul>
@@ -183,7 +177,7 @@ link" href="#"><i class="fas fa-book-open"></i>
             , showCancelButton: false
             , buttons: false
         });
-        @elseif(session()->has('error'))
+        @elseif(session()-> has('error'))
         swal({
             type: "error"
             , icon: "error"
