@@ -78,8 +78,11 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
                         </li>
                         @endcan
                         @can('categories.index')
-                        <li class="{{ setActive('admin/category') }}"><a class="nav-link" href="#"><i class="fas fa-folder"></i>
-                                <span>Kategori</span></a></li>
+                        <li class="{{ setActive('admin/category') }}">
+                            <a class="nav-link" href="{{route('admin.category.index')}}"><i class="fas fa-folder"></i>
+                                <span>Kategori</span>
+                            </a>
+                        </li>
                         @endcan
                         @can('events.index')
                         <li class="{{ setActive('admin/event') }}"><a class="nav-link" href="#"><i class="fas fa-bell"></i>
@@ -177,7 +180,7 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
             , showCancelButton: false
             , buttons: false
         });
-        @elseif(session()-> has('error'))
+        @elseif(session()->has('error'))
         swal({
             type: "error"
             , icon: "error"
