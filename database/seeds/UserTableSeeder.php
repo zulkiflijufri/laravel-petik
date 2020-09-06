@@ -20,10 +20,10 @@ class UserTableSeeder extends Seeder
             'password'  => bcrypt('ummikalsum')
         ]);
 
-        // assigment permission to role
         $permission = Permission::all();
-
         $role = Role::find(1);
+
+        // assigment permission to role
         $role->syncPermissions($permission);
 
         // assigment role with permission to user
