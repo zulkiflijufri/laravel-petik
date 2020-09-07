@@ -42,5 +42,8 @@ Route::group(['prefix' => 'admin'], function () {
 
         // photo
         Route::resource('/photo', 'Admin\PhotoController', ['except' => ['create','show','update', 'edit'], 'as' => 'admin']);
+
+        // video
+        Route::resource('/video', 'Admin\VideoController', ['except' => ['show'], 'as' => 'admin']);
     });
 });

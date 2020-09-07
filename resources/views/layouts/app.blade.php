@@ -96,7 +96,7 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
                                 <span>Foto</span></a></li>
                         @endcan
                         @can('videos.index')
-                        <li class="{{ setActive('admin/video') }}"><a href="#"><i class="fas fa-video"></i>
+                        <li class="{{ setActive('admin/video') }}"><a href="{{route('admin.video.index')}}"><i class="fas fa-video"></i>
                                 <span>Video</span></a></li>
                         @endcan
                         @if(auth()->user()->can('roles.index') || auth()->user()->can('permission.index') || auth()->user()->can('users.index'))
