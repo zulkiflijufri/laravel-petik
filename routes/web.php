@@ -39,5 +39,8 @@ Route::group(['prefix' => 'admin'], function () {
 
         // event
         Route::resource('/event', 'Admin\EventController', ['except' => ['show'], 'as' => 'admin']);
+
+        // photo
+        Route::resource('/photo', 'Admin\PhotoController', ['except' => ['create','show','update', 'edit'], 'as' => 'admin']);
     });
 });
