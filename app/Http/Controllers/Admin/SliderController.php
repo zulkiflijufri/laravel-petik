@@ -1,12 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Slider;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SliderRequest;
 
 class SliderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:sliders.index|sliders.create|sliders.delete']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,72 +21,53 @@ class SliderController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $sliders = Slider::latest()->paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.slider.index', compact('sliders'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\SliderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SliderRequest $request)
     {
-        //
-    }
+        // upload image
+        $image = $request->file('image');
+        $image->storeAs('public/sliders', $image->getClientOriginalName());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Slider  $slider
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Slider $slider)
-    {
-        //
-    }
+        $slider = Slider::create([
+            'image' => $image->getClientOriginalName(),
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Slider  $slider
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Slider $slider)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Slider  $slider
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Slider $slider)
-    {
-        //
+        if ($slider) {
+            return redirect()->route('admin.slider.index')->with(['success' => 'Data berhasil disimpan!']);
+        } else {
+            return redirect()->route('admin.slider.index')->with(['error' =>'Data gagal disimpan!']);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Slider  $slider
+     * @param  $slider
      * @return \Illuminate\Http\Response
      */
     public function destroy(Slider $slider)
     {
-        //
+        $slider->delete();
+        Storage::disk('local')->delete('public/sliders/'.$slider->image);
+
+        if ($slider) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error'
+            ]);
+        }
     }
 }

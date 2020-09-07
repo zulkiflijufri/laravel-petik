@@ -104,7 +104,7 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
                         @endif
                         @can('sliders.index')
                         <li class="{{ setActive('admin/slider') }}">
-                            <a href="#"><i class="fas fa-laptop"></i>
+                            <a href="{{route('admin.slider.index')}}"><i class="fas fa-laptop"></i>
                                 <span>Sliders</span></a>
                         </li>
                         @endcan

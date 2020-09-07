@@ -45,5 +45,8 @@ Route::group(['prefix' => 'admin'], function () {
 
         // video
         Route::resource('/video', 'Admin\VideoController', ['except' => ['show'], 'as' => 'admin']);
+
+        // slider
+        Route::resource('/slider', 'Admin\SliderController', ['except' => ['create','show','update', 'edit'], 'as' => 'admin']);
     });
 });
