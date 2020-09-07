@@ -30,4 +30,18 @@ class PostUpdateRequest extends FormRequest
             'content' => 'required',
         ];
     }
+
+
+    public function messages()
+    {
+        return [
+            'image.image' => 'Pastikan file berupa gambar',
+            'image.mimes' => 'Pastikan format gambar .jpeg, .jpg, atau .png',
+            'image.max' => 'Ukuran max 2 MB',
+            'title.required' => 'Judul harus diisi!',
+            'title.unique'  => 'Judul ini sudah ada!',
+            'category_id.required'  => 'Kategori harus diisi!',
+            'content.required'  => 'Konten harus diisi!',
+        ];
+    }
 }
