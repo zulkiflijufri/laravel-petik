@@ -85,7 +85,7 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
                         </li>
                         @endcan
                         @can('events.index')
-                        <li class="{{ setActive('admin/event') }}"><a class="nav-link" href="#"><i class="fas fa-bell"></i>
+                        <li class="{{ setActive('admin/event') }}"><a class="nav-link" href="{{route('admin.event.index')}}"><i class="fas fa-bell"></i>
                                 <span>Agenda</span></a></li>
                         @endcan
                         @if(auth()->user()->can('photos.index') || auth()->user()->can('videos.index'))

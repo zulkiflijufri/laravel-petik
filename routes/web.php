@@ -36,5 +36,8 @@ Route::group(['prefix' => 'admin'], function () {
 
         // post
         Route::resource('/post', 'Admin\PostController', ['except' => ['show'], 'as' => 'admin']);
+
+        // event
+        Route::resource('/event', 'Admin\EventController', ['except' => ['show'], 'as' => 'admin']);
     });
 });
