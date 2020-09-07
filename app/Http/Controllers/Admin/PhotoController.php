@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Photo;
 use Illuminate\Http\Request;
+use App\Http\Requests\PhotoRequest;
+use App\Http\Controllers\Controller;
 
 class PhotoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:photos.index|photos.create|photos.edit|photos.delete']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,50 +20,41 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $photos = Photo::latest()->when(request()->q,
+        function($photos) {
+            $photos = $photos->where('caption', 'like', '%' . request()->q . '%');
+        })->paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.photo.index', compact('photos'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PhotoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhotoRequest $request)
     {
-        //
+        // upload image
+        $image = $request->file('image');
+        $image->storeAs('public/photos', $image->getClientOriginalName());
+
+        $photo = Photo::create([
+            'image' => $image->getClientOriginalName(),
+            'caption'   => $request->input('caption')
+        ]);
+
+        if ($photo) {
+            return redirect()->route('admin.photo.index')->with(['success' => 'Data berhasil disimpan!']);
+        } else {
+            return redirect()->route('admin.photo.index')->with(['success' =>'Data gagal disimpan!']);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Photo  $photo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Photo $photo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Photo  $photo
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Photo $photo)
     {
-        //
+        return view('admin.photo.index', compact('photo'));
     }
 
     /**
@@ -80,6 +77,17 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //
+        $photo->delete();
+        Storage::disk('local')->delete('public/photos/'.$photo->image);
+
+        if ($photo) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error'
+            ]);
+        }
     }
 }
