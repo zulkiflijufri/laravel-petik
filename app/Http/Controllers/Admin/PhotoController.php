@@ -48,7 +48,7 @@ class PhotoController extends Controller
         if ($photo) {
             return redirect()->route('admin.photo.index')->with(['success' => 'Data berhasil disimpan!']);
         } else {
-            return redirect()->route('admin.photo.index')->with(['success' =>'Data gagal disimpan!']);
+            return redirect()->route('admin.photo.index')->with(['error' =>'Data gagal disimpan!']);
         }
     }
 
