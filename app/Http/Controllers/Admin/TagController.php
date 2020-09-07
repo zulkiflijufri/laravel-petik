@@ -111,7 +111,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $tag = Tag::findOrFail($id)->delete();
+        $tag = $tag->delete();
 
         if ($tag) {
             return response()->json([
