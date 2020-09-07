@@ -6,6 +6,7 @@ use App\Photo;
 use Illuminate\Http\Request;
 use App\Http\Requests\PhotoRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
