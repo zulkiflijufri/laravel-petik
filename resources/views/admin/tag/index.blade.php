@@ -40,7 +40,7 @@
                                 @foreach ($tags as $no => $tag)
                                 <tr>
                                     <th scope="row" style="text-align:center">
-                                    {{ ++$no + ($tags->currentPage()-1) * $tags->perPage()}}
+                                        {{ ++$no + ($tags->currentPage()-1) * $tags->perPage()}}
                                     </th>
                                     <td>{{ $tag->name }}</td>
                                     <td class="text-center">
