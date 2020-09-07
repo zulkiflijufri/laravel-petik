@@ -69,7 +69,7 @@ nav-link-lg"><i class="fas fa-bars"></i></a></li>
                         <li class="{{ setActive('admin/dashboard') }}"><a class="nav-link" href="{{ route('admin.dashboard.index') }}"><i class="fas fa-tachometer-alt"></i>
                                 <span>Dashboard</span></a></li>
                         @can('posts.index')
-                        <li class="{{ setActive('admin/post') }}"><a class="nav-link" href="#"><i class="fas fa-book-open"></i>
+                        <li class="{{ setActive('admin/post') }}"><a class="nav-link" href="{{route('admin.post.index')}}"><i class="fas fa-book-open"></i>
                                 <span>Berita</span></a></li>
                         @endcan
                         @can('tags.index')
