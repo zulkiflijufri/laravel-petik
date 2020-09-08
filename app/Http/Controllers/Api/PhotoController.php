@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class PhotoController extends Controller
 {
      /**
-    hotoList data photos
+     * List data photos
      *
      * @return void
      */
@@ -36,10 +36,10 @@ class PhotoController extends Controller
         $photos = Photo::latest()->take(2)->get();
         return response()->json([
             "response" => [
-                "status" => 20,
+                "status" => 200,
                 "messages" => "List data photos home page"
             ],
             "data" => $photos
-        ]);
+        ], 200);
     }
 }
