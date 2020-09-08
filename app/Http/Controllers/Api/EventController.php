@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class EventController extends Controller
 {
     /**
-     * List data posts
+     * List data events
      *
      * @return void
      */
@@ -26,7 +26,7 @@ class EventController extends Controller
     }
 
     /**
-     * Show post
+     * Show event
      *
      * @param string $slug
      * @return void
@@ -55,7 +55,7 @@ class EventController extends Controller
     }
 
     /**
-     * List data posts home page
+     * List data events home page
      *
      * @return void
      */
