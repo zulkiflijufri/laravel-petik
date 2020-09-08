@@ -27,3 +27,10 @@ Route::get('/homepage/post', 'Api\PostController@PostHomePage');
 Route::get('/event', 'Api\EventController@index');
 Route::put('/event/{id?}', 'Api\EventController@show');
 Route::get('/homepage/event', 'Api\EventController@EventHomePage');
+
+// slider
+Route::get('/slider', 'Api\SliderController@index');
+
+// tag
+Route::get('/tag', 'Api\TagController@index');
+Route::put('/tag/{slug?}', 'Api\TagController@show');
