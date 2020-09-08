@@ -18,6 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// post
 Route::get('/post', 'Api\PostController@index');
 Route::put('/post/{id?}', 'Api\PostController@show');
 Route::get('/homepage/post', 'Api\PostController@PostHomePage');
+
+// event
+Route::get('/event', 'Api\EventController@index');
+Route::put('/event/{id?}', 'Api\EventController@show');
+Route::get('/homepage/event', 'Api\EventController@EventHomePage');
