@@ -42,3 +42,7 @@ Route::put('/category/{slug?}', 'Api\CategoryController@show');
 // photo
 Route::get('/photo', 'Api\PhotoController@index');
 Route::get('/homepage/photo', 'Api\PhotoController@PhotoHomePage');
+
+// video
+Route::get('/video', 'Api\VideoController@index');
+Route::get('/homepage/video', 'Api\VideoController@VideoHomePage');
