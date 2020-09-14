@@ -32,6 +32,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center;width:6%">NO.</th>
+                                    <th scope="col">Gambar BERITA</th>
                                     <th scope="col">JUDUL BERITA</th>
                                     <th scope="col">KATEGORI</th>
                                     <th scope="col" style="width: 15%;text-align:center">AKSI</th>
@@ -43,6 +44,7 @@
                                     <th scope="row" style="text-align:center">
                                         {{ ++$no + ($posts->currentPage()-1) * $posts->perPage() }}
                                     </th>
+                                    <td><img src="{{ Storage::url('public/posts/'.$post->image) }}" style="width:150px"></td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->category->name }}</td>
                                     <td class="text-center">
@@ -76,47 +78,47 @@
         var id = id;
         var token = $("meta[name='csrf-token']").attr("content");
         swal({
-            title: "APAKAH KAMU YAKIN ?"
-            , text: "INGIN MENGHAPUS DATA INI!"
-            , icon: "warning"
-            , buttons: [
-                'TIDAK'
-                , 'YA'
-            ]
-            , dangerMode: true
-        , }).then(function(isConfirm) {
+            title: "APAKAH KAMU YAKIN ?",
+            text: "INGIN MENGHAPUS DATA INI!",
+            icon: "warning",
+            buttons: [
+                'TIDAK',
+                'YA'
+            ],
+            dangerMode: true,
+            }).then(function(isConfirm) {
             if (isConfirm) {
                 //ajax delete
                 jQuery.ajax({
-                    url: "{{ route("admin.post.index") }}/" + id
-                    , data: {
-                        "id": id
-                        , "_token": token
-                    }
-                    , type: 'DELETE'
-                    , success: function(response) {
+                    url: "{{ route("admin.post.index") }}/" + id,
+                    data: {
+                        "id": id,
+                        "_token": token
+                    },
+                    type: 'DELETE',
+                    success: function(response) {
                         if (response.status == "success") {
                             swal({
-                                title: 'BERHASIL!'
-                                , text: 'DATA BERHASIL DIHAPUS!'
-                                , icon: 'success'
-                                , timer: 1000
-                                , showConfirmButton: false
-                                , showCancelButton: false
-                                , buttons: false
-                            , }).then(function() {
+                                title: 'BERHASIL!',
+                                text: 'DATA BERHASIL DIHAPUS!',
+                                icon: 'success',
+                                timer: 1000,
+                                showConfirmButton: false,
+                                showCancelButton: false,
+                                buttons: false
+                            }).then(function() {
                                 location.reload();
                             });
                         } else {
                             swal({
-                                title: 'GAGAL!'
-                                , text: 'DATA GAGAL DIHAPUS!'
-                                , icon: 'error'
-                                , timer: 1000
-                                , showConfirmButton: false
-                                , showCancelButton: false
-                                , buttons: false
-                            , }).then(function() {
+                                title: 'GAGAL!',
+                                text: 'DATA GAGAL DIHAPUS!',
+                                icon: 'error',
+                                timer: 1000,
+                                showConfirmButton: false,
+                                showCancelButton: false,
+                                buttons: false,
+                             }).then(function() {
                                 location.reload();
                             });
                         }

@@ -39,7 +39,11 @@ class PhotoController extends Controller
     {
         // upload image
         $image = $request->file('image');
-        $image->storeAs('public/photos', $image->getClientOriginalName());
+        if (Storage::exists('public/photos/'.$image->getClientOriginalName())) {
+            return redirect()->back()->with(['error' => 'Gambar sudah ada, pilih gambar lain']);
+        } else {
+            $image->storeAs('public/photos', $image->getClientOriginalName());
+        }
 
         $photo = Photo::create([
             'image' => $image->getClientOriginalName(),

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,12 +42,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/event', 'Admin\EventController', ['except' => ['show'], 'as' => 'admin']);
 
         // photo
-        Route::resource('/photo', 'Admin\PhotoController', ['except' => ['create','show','update', 'edit'], 'as' => 'admin']);
+        Route::resource('/photo', 'Admin\PhotoController', ['except' => ['create', 'show', 'update', 'edit'], 'as' => 'admin']);
 
         // video
         Route::resource('/video', 'Admin\VideoController', ['except' => ['show'], 'as' => 'admin']);
 
         // slider
-        Route::resource('/slider', 'Admin\SliderController', ['except' => ['create','show','update', 'edit'], 'as' => 'admin']);
+        Route::resource('/slider', 'Admin\SliderController', ['except' => ['create', 'show', 'update', 'edit'], 'as' => 'admin']);
     });
 });

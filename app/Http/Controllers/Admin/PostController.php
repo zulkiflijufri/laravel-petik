@@ -55,7 +55,11 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $image = $request->file('image');
-        $image->storeAs('public/posts', $image->getClientOriginalName());
+        if (Storage::exists('public/posts/'.$image->getClientOriginalName())) {
+            return redirect()->back()->with(['error' => 'Gambar sudah ada, pilih gambar lain']);
+        } else {
+            $image->storeAs('public/posts', $image->getClientOriginalName());
+        }
 
         $post = Post::create([
             'image' => $image->getClientOriginalName(),
